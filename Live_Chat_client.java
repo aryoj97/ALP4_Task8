@@ -1,21 +1,24 @@
 import java.io.*;  
 import java.net.*;  
 public class Live_Chat_client {  
-	public static void main(String[] args) {  
-		try (     
-			Socket clientSocket = new Socket("localhost",5433);  
-			PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
-			BufferedReader inputText = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			BufferedReader stdIn = new BufferedReader( new InputStreamReader(System.in));
-		) 
-		{
-			String userInput;
-			while ((userInput = stdIn.readLine()) != null) {
-				output.println(userInput);
-				System.out.println(inputText.readLine());
+	public static void main(String[] args) throws IOException {  
+		try {
+			String sentence;
+			String modifiedSentence;
+			BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
+			Socket clientSocket = new Socket ("localhost", 6789);
+			BufferedReader inFromServer = new BufferedReader(new InputStreamReader (clientSocket.getInputStream()));
+			DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
+			modifiedSentence = inFromServer.readLine();
+			System.out.println(modifiedSentence);
+			while(true){
+				sentence = inFromUser.readLine();
+				outToServer.writeBytes("client: " + sentence + '\n');
 			}
-		} catch(Exception e) {
+		} catch (IOException e) {
 			System.out.println(e);
-		}  
+		} catch (Exception e) {
+			System.out.print(e);
+		}
 	}  
 }  
