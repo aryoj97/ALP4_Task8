@@ -11,7 +11,7 @@ public class Live_Chat {
 		) {
 			String inputLine;
 			while ((inputLine = in.readLine()) != null) {
-				output.println("inputLine");
+				output.println("Hello world");
 				System.out.println(inputLine);
 			}
 		} catch (IOException e) {

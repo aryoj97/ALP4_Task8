@@ -12,8 +12,8 @@ public class Live_Chat_client {
 			String userInput;
 			while ((userInput = stdIn.readLine()) != null) {
 				output.println(userInput);
+				System.out.println(inputText.readLine());
 			}
-			clientSocket.close();
 		} catch(Exception e) {
 			System.out.println(e);
 		}  
